@@ -1,3 +1,5 @@
+var turn = [];
+var turnCount = 0;
 function Players (player){
   this.player = player,
   this.die = 0,
@@ -22,33 +24,65 @@ Players.prototype.totalPoints=function(){
 }
 
 Players.prototype.endTurn = function(){
-  return this.currentScore=0;
+   this.currentScore=0;
+   if (turnCount===0)
+    return turnCount=1;
+  else
+    return turnCount = 0;
 }
 
 Players.prototype.winner = function (){
-  if (this.totalScore>=100)
+  if (this.totalScore>=20)
     return this.win = true;
   else
     return this.win = false;
 }
 
 
-
-var player1 = new Players ("player1");
-
-
-
-
 $(document).ready(function() {
+  var player1;
+  var player2;
+  var userRoll = [];
+  var userCurrent = [];
+  var userTotal =[];
   $("form#player1").submit(function(event) {
     event.preventDefault();
-    var player1Name = $("player1Name").val();
+    var name1 = $("#player1Name").val();
+    player1 = new Players (name1);
+    turn.push(player1);
+    console.log(turn[0]);
   });
-});
 
-$(document).ready(function() {
   $("form#player2").submit(function(event) {
     event.preventDefault();
-    var player2Name = $("player2Name").val();
+    var name2 = $("#player2Name").val();
+    player2 = new Players (name2);
+    turn.push(player2);
+    console.log(turn[1]);
+  });
+  $("#roll").click(function(){
+    $(".currentName").text(turn[turnCount].player);
+    userRoll[turnCount] = turn[turnCount].roll();
+    if (userRoll[turnCount]===1)
+      turn[turnCount].endTurn();
+    console.log(userRoll[turnCount]);
+    $(".roll").text(userRoll[turnCount]);
+    userCurrent[turnCount] = turn[turnCount].currentPoints();
+    $(".current").text(userCurrent[turnCount]);
+  });
+  $("#end").click(function(){
+    userTotal[turnCount] = turn[turnCount].totalPoints();
+    $(".total").text(userTotal[turnCount]);
+    console.log(turn[turnCount]);
+    $(".totalName").text(turn[turnCount].player);
+    if (turn[turnCount].winner())
+      alert(turn[turnCount].player +" has won!");
+    else
+      turn[turnCount].endTurn();
+    $(".currentName").text(turn[turnCount].player);
+    console.log(turn[turnCount]);
+  });
+  $("#newGame").click(function(){
+    location.reload();
   });
 });

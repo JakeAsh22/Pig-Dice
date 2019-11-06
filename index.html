@@ -14,25 +14,26 @@
 
     <div class="container">
       <form id="player1">
-        <h2>Player One</h2>
-        <button type="button" class="btn btn-danger">Roll</button>
-        <button type="submit" class="btn btn-success">End Turn</button>
-        <p>You rolled a <span class="p1roll"></span>! Your current round score is: <span class="p1current"></span></p>
-        <p>Your total score is: <span class="p1total"></span></p>
-
+        <h2>Player1:</h2>
+        <label for="player1Name"></label>
+        <input type="text" id="player1Name">
+        <button type="submit" name="button" class="btn btn-primary">Submit your name!</button>
       </form>
 
       <form id="player2">
-        <h2>Player Two</h2>        
-        <button type="submit" class="btn btn-danger">Roll</button>
-        <button type="submit" class="btn btn-success">End Turn</button>
-        <p>You rolled a <span class="p2roll"></span>! Your current round score is: <span class="p2current"></span></p>
-        <p>Your total score is: <span class="p2total"></span></p>
+        <h2>Player2:</h2>
+        <label for="player2Name"></label>
+        <input type="text" id="player2Name">
+        <button type="submit" name="button" class="btn btn-primary">Submit your name!</button>
       </form>
 
-    </div>
-    <div id="resultBox">
+      <button type="button" class="btn btn-danger" id="roll">Roll</button>
+      <button type="submit" class="btn btn-success" id="end">End Turn</button>
+      <h4><span class = "currentName"></span>'s turn</h4>
+      <p>You rolled a <span class="roll"></span>! Your current round score is: <span class="current"></span></p>
+      <p><span class = "totalName"></span>'s total score is: <span class="total"></span></p>
 
     </div>
+    <button type="submit" name="button" id="newGame" class="btn btn-secondary">New Game!</button>
   </body>
 </html>
